@@ -49,54 +49,39 @@ console.log("Proje açıldı!");
 
 /* Kodlar Buradan aşağıya */
 
-// Görev 1: Nav anchorların içeriğini ve sınıfnı objeden al ve yerleştir (iki çözüm alternatifli yaptım)
+// Görev 1: Nav anchorların içeriğini ve sınıfnı objeden al ve yerleştir 
 
 let navLinks = document.querySelectorAll("nav a");
 
-const navItemsArr = Object.values(siteContent.nav);
-
-// for (let i=0; i<navLinks.length; i++){
-//   navLinks[i].textContent = navItemsArr[i];
-//   navLinks[i].className = "italic"
-// }
-
 navLinks.forEach((item, index) => {
-  item.textContent = navItemsArr[index];
+  item.textContent = siteContent.nav[`nav-item-${index+1}`]
   item.className = "italic";
 });
 
-// Görev 2: cta-text class'ının içi
+// Görev 2: cta-text class'ının altındaki h1 ve button'ın içi
 
-const ctaElements = document.querySelectorAll(".cta-text h1, .cta-text button");
-const ctaArr = Object.values(siteContent.cta)
-
-ctaElements.forEach((item,index)=>{
-  item.textContent = ctaArr[index]
-})
-
-// alternatif çözüm
-
-// let ctatexth1 = document.querySelector(".cta-text h1");
-// ctatexth1.textContent = siteContent["cta"]["h1"]
-// let ctatextbutton = document.querySelector(".cta-text button");
-// ctatextbutton.textContent = siteContent["cta"]["button"];
-
+document.querySelector("h1").textContent = siteContent.cta.h1;
+document.querySelector(".cta-text button").textContent = siteContent.cta.button;
 
 //Görev 3: Ana içerik 
 
 const mainContentElements = document.querySelectorAll(".text-content > *");
-const mainContentTextArr = Object.values(siteContent["ana-içerik"]);
-mainContentElements.forEach((element,index)=>{
-  element.textContent = mainContentTextArr[index]
-})
+
+let i = 0;
+for (let key in siteContent["ana-içerik"]) {
+  mainContentElements[i].textContent = siteContent["ana-içerik"][key];
+  i++;
+}
 
 //Görev 4: iletisim (section contact)
 
 const contactElements = document.querySelectorAll(".contact > *");
-const contactTextArr = Object.values(siteContent.iletisim);
-contactElements.forEach((element,index)=>{
-  element.textContent = contactTextArr[index];
-})
+
+let j = 0;
+for (let key in siteContent.iletisim){
+  contactElements[j].textContent = siteContent.iletisim[key];
+  j++;
+}
 
 //Görev 5: footer anchor içerik ve class'ı
 
@@ -105,9 +90,11 @@ document.querySelector("footer a").textContent = siteContent.footer.copyright;
 
 //Görev 6: images linkleri
 
-document.getElementById("logo-img").setAttribute("src", siteContent.images["logo-img"]); 
+let imgs = document.querySelectorAll("img");
 
-document.getElementById("cta-img").setAttribute("src", siteContent.images["cta-img"]);
-
-document.getElementById("middle-img").setAttribute("src", siteContent.images["accent-img"]);
+let k = 0;
+for (let key in siteContent.images){
+  imgs[k].setAttribute("src", siteContent.images[key]);
+  k++;
+}
 
